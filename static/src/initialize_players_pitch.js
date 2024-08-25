@@ -64,7 +64,7 @@ function initializeVisualization(trackingData, predictions) {
     }
 
     // Plot d3-soccer Pitch
-    var pitch = d3.pitch().height(600)
+    var pitch = d3.pitch().height(550)
     .rotate(false) 
     .showDirOfPlay(false)  
     .shadeMiddleThird(false) 
