@@ -10,10 +10,14 @@
         <form action="{{ url_for('check_dropdown') }}" method="post">
             <div class="form-container2">
                 <h2>Select Tracking Data Sequence</h2>
+                {% if error %}
+                    <div class="error-message">{{ error }}</div>
+                {% endif %}
                 <div class="form-group">
                     <label for="competition">Competition</label>
-                    <select id="competition" name="competition">
+                    <select id="competition" name="competition" onchange="validateForm()">
                         <option value="">--Select--</option>
+                        <!-- Options will be dynamically populated -->
                     </select>
                 </div>
                 
@@ -21,18 +25,20 @@
                     <label for="matches">Match</label>
                     <select id="matches" name="matches" disabled>
                         <option value="">--Select--</option>
+                        <!-- Options will be dynamically populated -->
                     </select>
                 </div>
-
+    
                 <div class="form-group">
                     <label for="sequence">Event sequence</label>
                     <select id="sequence" name="sequence" disabled>
                         <option value="">--Select--</option>
+                        <!-- Options will be dynamically populated -->
                     </select>
                 </div>
-
+    
                 <div class="form-group">
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="submitInfo">Submit</button>
                 </div>
             </div>
         </form>

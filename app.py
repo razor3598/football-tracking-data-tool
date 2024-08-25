@@ -75,7 +75,7 @@ def get_animation_data():
     return jsonify(combined_data)
 
     
-# Collect Data sent from 
+# Collect Data sent from JS
 @app.route('/collect_coordinates', methods=['POST'])
 def receive_data():
     data = request.json
@@ -84,12 +84,31 @@ def receive_data():
     return jsonify({'status': 'success', 'prediction': prediction}), 200
 
 
-# Collect Data sent from 
-@app.route('/check_dropdown')
-def check_dropdown():
+@app.route('/dropdown')
+def dropdown():
     # Check if the user is authenticated to view the page
     if session.get('authorized'):
-        return render_template('dropdownselection.html')
+        # Render login template with optional error message
+        error = request.args.get('error', '')
+        return render_template('dropdownselection.html', error=error)
+    else:
+        # Redirect to landing page if not authenticated
+        return redirect(url_for('home'))
+    
+
+@app.route('/check_dropdown', methods=['POST'])
+def check_dropdown():
+    competition = request.form.get('competition')
+    matches = request.form.get('matches')
+    sequence = request.form.get('sequence')
+
+    # Handle missing data (e.g., return an error message)
+    if not competition or not matches or not sequence:
+        return redirect(url_for('dropdown' , error='All dropdowns must be filled!'))
+    
+    # Check if the user is authenticated to view the page
+    if session.get('authorized'):
+        return redirect(url_for('tracking_tool'))
     else:
         # Redirect to landing page if not authenticated
         return redirect(url_for('home'))
@@ -116,7 +135,7 @@ def login():
     # Validate credentials
     if username == APP_USERNAME and password == APP_PASSWORD:
         session['authorized'] = True
-        return redirect(url_for('check_dropdown'))
+        return redirect(url_for('dropdown'))
     else:
         session['authorized'] = False
         return redirect(url_for('home' , error='Invalid Username or Password'))
