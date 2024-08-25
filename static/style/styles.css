@@ -116,4 +116,14 @@
 .logout-button:hover {
   background-color: #c82333;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.8em;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
     

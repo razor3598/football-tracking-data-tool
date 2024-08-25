@@ -16,7 +16,10 @@ import os
 # Load environment variables from the .env file
 load_dotenv()
 
-# Dummy credentials. Use a DB & hashed password if in production.
+# Dummy credentials 
+'''
+Use a DB & hashed password if in production.
+'''
 APP_USERNAME = os.environ.get("APP_USERNAME")
 APP_PASSWORD = os.environ.get("APP_PASSWORD")
 
@@ -40,7 +43,7 @@ sequences = {
 @app.route("/")
 def home():
     if session.get("authorized"):
-        return render_template('trackingtool.html')
+        return render_template('dropdownselection.html')
     
     # Render login template with optional error message
     error = request.args.get('error', '')
@@ -58,6 +61,9 @@ def tracking_tool():
 @app.route('/animation-data', methods=['POST'])
 @cross_origin(supports_credentials=True)
 def get_animation_data():
+    '''
+    REPLACE THIS CODE BY RETRIEVING TRACKING DATA FROM YOUR DATABASE / FILES.
+    '''
     # Open and read the JSON file
     with open('data/tracking_frames_1.json', 'r') as file:
         tracking_data = json.load(file)
