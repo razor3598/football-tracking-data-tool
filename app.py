@@ -85,6 +85,10 @@ def get_animation_data():
 @app.route('/collect_coordinates', methods=['POST'])
 def receive_data():
     data = request.json
+
+    '''
+    CALL YOUR MODEL HERE
+    '''
     # Generate a random float between 0 and 1
     prediction = round(random.random(), 2)
     return jsonify({'status': 'success', 'prediction': prediction}), 200

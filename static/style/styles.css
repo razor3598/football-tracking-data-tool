@@ -117,6 +117,23 @@
   background-color: #c82333;
 }
 
+#whatIf {
+  background-color: #007BFF; /* Blue background */
+  color: #FFFFFF; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for size */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+/* Hover effect */
+#whatIf:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
 footer {
   position: fixed;
   bottom: 0;
