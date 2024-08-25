@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tracking Data Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}">
+</head>
+<body>
+    <div class="centered-container">
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        <form action="{{ url_for('check_dropdown') }}" method="post">
+            <div class="form-container2">
+                <h2>Select Tracking Data Sequence</h2>
+                <div class="form-group">
+                    <label for="competition">Competition</label>
+                    <select id="competition" name="competition">
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="matches">Match</label>
+                    <select id="matches" name="matches" disabled>
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sequence">Event sequence</label>
+                    <select id="sequence" name="sequence" disabled>
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const competitionDropdown = document.getElementById('competition');
+                const matchesDropdown = document.getElementById('matches');
+                const sequenceDropdown = document.getElementById('sequence');
+        
+                function populateDropdown(dropdown, data) {
+                    dropdown.innerHTML = '<option value="">--Select--</option>';
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.id;
+                        option.textContent = item.name;
+                        dropdown.appendChild(option);
+                    });
+                    dropdown.disabled = data.length === 0;
+                }
+        
+                function fetchData(url, payload) {
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.json());
+                }
+        
+                // Fetch competitions data for the first dropdown
+                fetchData('/get-competitions', {})
+                    .then(data => populateDropdown(competitionDropdown, data))
+                    .catch(error => console.error('Error fetching competitions data:', error));
+        
+                // Event listener for the competition dropdown
+                competitionDropdown.addEventListener('change', function() {
+                    const selectedCompetitionId = competitionDropdown.value;
+                    if (selectedCompetitionId) {
+                        fetchData('/get-matches', { competition_id: selectedCompetitionId })
+                            .then(data => {
+                                populateDropdown(matchesDropdown, data);
+                                matchesDropdown.disabled = false;
+                                sequenceDropdown.innerHTML = '<option value="">--Select--</option>';
+                                sequenceDropdown.disabled = true;
+                            })
+                            .catch(error => console.error('Error fetching matches data:', error));
+                    } else {
+                        matchesDropdown.innerHTML = '<option value="">--Select--</option>';
+                        matchesDropdown.disabled = true;
+                        sequenceDropdown.innerHTML = '<option value="">--Select--</option>';
+                        sequenceDropdown.disabled = true;
+                    }
+                });
+        
+                // Event listener for the matches dropdown
+                matchesDropdown.addEventListener('change', function() {
+                    const selectedMatchId = matchesDropdown.value;
+                    if (selectedMatchId) {
+                        fetchData('/get-sequences', { match_id: selectedMatchId })
+                            .then(data => {
+                                populateDropdown(sequenceDropdown, data);
+                                sequenceDropdown.disabled = false;
+                            })
+                            .catch(error => console.error('Error fetching sequences data:', error));
+                    } else {
+                        sequenceDropdown.innerHTML = '<option value="">--Select--</option>';
+                        sequenceDropdown.disabled = true;
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

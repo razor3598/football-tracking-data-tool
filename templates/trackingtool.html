@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tracking Data Tool</title>
+    <!-- Link to the external CSS file -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script  type="text/javascript" src="{{ url_for('static', filename='src/d3-soccer/dist/d3-soccer.js') }}"></script>
+    <script  type="text/javascript" src="{{ url_for('static', filename='src/d3-soccer/dist/d3-soccer.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <script  type="text/javascript" src="{{ url_for('static', filename='src/collectCoordinates.js') }}"></script>
+ 
+</head>
+<body>
+
+
+    <div class="container2">
+       <h1>Tracking Data Tool - {Model Template}</h1>
+       <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+       <button id="whatIf" onclick="collectCoordinates()">Compute What If</button>
+       <div class="container2">&nbsp;</div>
+       <span id="predictionValue"></span>
+    </div>
+    
+    <div class="container">
+        <div id="chart" class="light-theme"></div>
+        <div>
+            <button id="playPauseButton">▶️</button>
+            <input type="range" id="frameSlider" min="0" max="99" value="0" step="1" />
+        </div>
+        <svg id="lineChart" class="line-chart"></svg>
+    </div>
+    
+    
+
+    <script  type="text/javascript" src="{{ url_for('static', filename='src/anims.js') }}"></script>    
+    <script  type="text/javascript" src="{{ url_for('static', filename='src/dragging-helper.js') }}"></script>  
+    <script type="text/javascript" src="{{ url_for('static', filename='src/initialize_players_pitch.js')}}"></script>
+</body>
+</html>
