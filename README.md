@@ -1,12 +1,13 @@
 # Tracking Data Tool in Football
 
-<p align="center">
-  <img src="https://github.com/razor3598/football-tracking-data-tool/blob/main/example/clip.gif" alt="Example GIF">
-</p>
-
 As football tracking data becomes more comprehensive, the use of machine learning models in the sport has surged. These models leverage vast amounts of tracking data, including player movements, ball trajectories, and team formations, to generate insights and predictions (For example - [See here](https://github.com/USSoccerFederation/ussf_ssac_23_soccer_gnn)). By analyzing this data, machine learning algorithms can enhance performance analysis, strategic planning, and player development. They help in identifying patterns and trends that were previously hidden, offering valuable information for coaches, analysts, and teams. As the volume and accuracy of tracking data continue to grow, the potential for machine learning to revolutionize football analysis and decision-making becomes increasingly significant.
 
 Observing tracking data as video frames, provides a dynamic and intuitive way to visualize player and ball movements in real-time. This approach allows users to better understand the flow of the game and the impact of specific actions. The "what-if" analysis feature enhances its utility by enabling users to simulate various scenarios and assess their potential outcomes. Coaches, analysts, and teams can experiment with different strategies, player positionsto see how they might influence game performance. This repository provides a Flask backend server and a Javascript frontend for observing and analyzing the tracking data frames.
+
+
+<p align="center">
+  <img src="https://github.com/razor3598/football-tracking-data-tool/blob/main/example/clip.gif" alt="Example GIF">
+</p>
 
 ---
 ## How to Run?
