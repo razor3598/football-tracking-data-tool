@@ -30,6 +30,22 @@ Observing tracking data as video frames, provides a dynamic and intuitive way to
    ```
    This will start a development server for testing. Head over to your browser and navigate to http://127.0.0.1:5000/
 
+## Things to note
+When using Flask backend general approach is everything needs to be under one directory. The static folder contains assets used by the templates, including CSS files, JavaScript files, and images.The templates folder contains only templates. These have an ```.html``` extension. A typical directory structure looks like:
+```
+my-flask-app
+   ├── static/
+   │   └── css/
+   │       └── styles.css
+   ├── templates/
+   │   ├── index.html
+   │   └── login.html
+   ├── app.py
+```
+
+> [!IMPORTANT]  
+> The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything, but the static and templates folders must be named and organized as shown above. The static folder can contain multiple folders and files. The names of files are up to you.
+
 ## If using in Production
 If you plan on using the application in production a few things to take care of:
 * Adjust Pitch dimensions. The current setup takes in coordinates ```x-cordinate -> (0, 105)``` and ```y-cordinate -> (0, 68)```.
